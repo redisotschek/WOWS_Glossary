@@ -1,18 +1,48 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <main class="p-8">
+    <nav class="text-left">
+      <router-link to="/" exact-active-class="home">Домой</router-link>
+    </nav>
+    <router-view />
+  </main>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+<script setup lang="ts">
+import { useQuery } from "@vue/apollo-composable";
+import { VEHICLES_QUERY, TYPES_QUERY, NATIONS_QUERY } from "./graphql/queries";
+import { watchEffect } from "vue";
+import { useStore } from "./store";
+const store = useStore();
 
-export default defineComponent({
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-});
+if (!store.state.allVehicles.length) {
+  const { result } = useQuery(VEHICLES_QUERY);
+
+  watchEffect(() => {
+    if (result.value?.vehicles) {
+      store.commit("setVehicles", result.value.vehicles);
+    }
+  });
+}
+
+if (!store.state.allTypes.length) {
+  const { result } = useQuery(TYPES_QUERY);
+
+  watchEffect(() => {
+    if (result.value?.vehicleTypes) {
+      store.commit("setTypes", result.value.vehicleTypes);
+    }
+  });
+}
+
+if (!store.state.allNations.length) {
+  const { result } = useQuery(NATIONS_QUERY);
+
+  watchEffect(() => {
+    if (result.value?.nations) {
+      store.commit("setNations", result.value.nations);
+    }
+  });
+}
 </script>
 
 <style lang="scss">
@@ -22,6 +52,36 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+body {
+  background-color: #e5e5f7;
+  background-image: radial-gradient(#444cf7 2px, #e5e5f7 2px);
+  background-size: 40px 40px;
+}
+
+.home {
+  color: #444cf7;
+}
+
+ul {
+  list-style-type: none;
+}
+
+* {
+  user-select: none;
+}
+
+nav {
+  padding: 30px;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
 }
 </style>
