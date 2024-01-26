@@ -1,16 +1,16 @@
 <template>
   <div class="categories mt-8">
     <div class="logo m-auto h-16"></div>
-    <main class="md:p-8 flex flex-col md:flex-row">
+    <main class="md:p-8 flex flex-col md:flex-row items-start">
       <aside class="flex flex-col mx-4 md:w-1/3">
-        <h2 class="text-lg font-bold mb-2 text-gray-400">Классы кораблей</h2>
+        <h2 class="text-lg font-bold mt-1 text-gray-400">Классы кораблей</h2>
         <template class="block md:hidden">
           <Dropdown :title="currentType?.title || 'Выберите класс'">
             <TypesMenu />
           </Dropdown>
         </template>
         <TypesMenu class="hidden md:block" />
-        <h2 class="text-lg font-bold mb-2 mt-2 text-gray-400">Нации</h2>
+        <h2 class="text-lg font-bold mt-2 text-gray-400">Нации</h2>
         <template class="block md:hidden">
           <Dropdown :title="currentNation?.title || 'Выберите нацию'">
             <NationsMenu />

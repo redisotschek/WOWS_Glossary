@@ -27,10 +27,12 @@
           v-for="vehicle in sortedVehicles"
           :key="vehicle.id"
           @click="setCurrentVehicle(vehicle)"
-          class="text-lg bg-gray-800 border-gray-600 cursor-pointer max-h-10 border-b"
+          class="text-lg bg-gray-800 border-gray-600 cursor-pointer border-b"
         >
           <td>
-            <img class="h-10" :src="vehicle.icons.default" />
+            <div class="h-10 w-full">
+              <img class="h-full m-auto" :src="vehicle.icons.default" />
+            </div>
           </td>
           <td>
             {{ vehicle?.title || vehicle?.name }}

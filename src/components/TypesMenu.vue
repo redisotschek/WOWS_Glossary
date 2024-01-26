@@ -1,8 +1,5 @@
 <template>
-  <ul
-    class="py-2 text-sm text-gray-200"
-    aria-labelledby="dropdownDefaultButton"
-  >
+  <ul class="text-sm text-gray-200" aria-labelledby="dropdownDefaultButton">
     <li
       v-for="vehicleType in types"
       :key="vehicleType?.name"
