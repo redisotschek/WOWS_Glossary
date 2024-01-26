@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Vehicle from '@/views/Vehicle.vue'
 import Categories from '@/views/Categories.vue'
 
 const routes: Array<RouteRecordRaw> = [

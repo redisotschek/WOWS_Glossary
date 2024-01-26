@@ -49,16 +49,6 @@ export const store = createStore<State>({
     }
   },
   getters: {
-    getVehiclesByType(state: State) {
-      return (type: string) => {
-        return state.allVehicles.filter(vehicle => vehicle.type.name === type)
-      }
-    },
-    getVehiclesByNation(state: State) {
-      return (nation: string) => {
-        return state.allVehicles.filter(vehicle => vehicle.nation.name === nation)
-      }
-    },
     getNationByName(state: State) {
       return (name: string) => {
         return state.allNations.find(nation => nation.name === name)
@@ -67,13 +57,6 @@ export const store = createStore<State>({
     getTypeByName(state: State) {
       return (name: string) => {
         return state.allTypes.find(type => type.name === name)
-      }
-    },
-    getVehicleById(state: State) {
-      return (id: string) => {
-        console.log(id);
-
-        return state.allVehicles.find(vehicle => vehicle.id == id)
       }
     },
     getFilteredVehicles(state: State) {

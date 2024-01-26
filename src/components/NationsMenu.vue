@@ -7,8 +7,7 @@
       v-for="nation in nations"
       :key="nation?.name"
       @click="setCurrentNation(nation)"
-      class="flex px-4 py-2 text-gray-800 hover:text-black cursor-pointer items-center"
-      :style="{ backgroundColor: nation?.color }"
+      class="flex px-4 py-2 bg-gray-700 hover:bg-gray-600 hover:text-white cursor-pointer items-center"
       :class="{
         active: isActive(nation?.name),
       }"
@@ -26,7 +25,6 @@
 <script setup lang="ts">
 import { INation } from "@/types/interfaces";
 import { ComputedRef, computed } from "vue";
-import CategoryLink from "@/components/blocks/CategoryLink.vue";
 import { useStore } from "@/store";
 const store = useStore();
 
