@@ -8,30 +8,6 @@ const routes: Array<RouteRecordRaw> = [
     name: 'categories',
     component: Categories
   },
-  {
-    path: '/types/:type',
-    name: 'type',
-    props: true,
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Types.vue')
-  },
-  {
-    path: '/nations/:nation',
-    name: 'nation',
-    props: true,
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Nations.vue')
-  },
-  {
-    path: '/vehicle/:id',
-    name: 'vehicle',
-    props: true,
-    component: Vehicle
-  },
 ]
 
 const router = createRouter({

@@ -1,57 +1,80 @@
 <template>
-  <table class="m-auto bg-gray-400 p-5">
-    <thead>
+  <table
+    class="w-full mt-8 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+  >
+    <thead
+      class="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+    >
       <tr>
-        <th></th>
-        <th>Название</th>
+        <th scope="col" class="py-3"></th>
+        <th scope="col" class="py-3">Название</th>
         <template v-for="field in sortableKeys" :key="field.key">
-          <th class="cursor-pointer" @click="sortTable(field.key)">
+          <th scope="col" class="cursor-pointer" @click="sortTable(field.key)">
             {{ field.caption }}
           </th>
         </template>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="vehicle in sortedVehicles" :key="vehicle.id">
-        <td class="m-auto">
-          <img class="h-10" :src="vehicle.icons.default" />
-        </td>
-        <td class="m-auto">
-          <router-link
-            :to="{
-              name: 'vehicle',
-              params: { id: vehicle.id },
-            }"
-            >{{ vehicle?.title || vehicle?.name }}
-          </router-link>
-        </td>
-        <td class="m-auto">{{ vehicle.level }}</td>
-        <td class="m-auto">
-          <router-link
-            :to="{
-              name: 'nation',
-              params: { nation: vehicle.nation.name },
-            }"
-          >
-            {{ getNationByName(vehicle.nation.name)?.title }}
-          </router-link>
-        </td>
-        <td class="m-auto">
-          <router-link
-            :to="{
-              name: 'type',
-              params: { type: vehicle.type.name },
-            }"
-          >
-            {{ getVehicleTypeByName(vehicle.type.name)?.title }}
-          </router-link>
-        </td>
+      <tr
+        v-if="!vehicles.length"
+        @click=""
+        class="text-center text-xl w-full font-bold m-auto"
+      >
+        <td></td>
+        <td></td>
+        <td>Нет данных</td>
+        <td></td>
+        <td></td>
       </tr>
+      <template v-else
+        ><tr
+          v-for="vehicle in sortedVehicles"
+          :key="vehicle.id"
+          @click="setCurrentVehicle(vehicle)"
+          class="bg-white text-lg border-b dark:bg-gray-800 dark:border-gray-700 cursor-pointer"
+        >
+          <td>
+            <img class="h-10" :src="vehicle.icons.default" />
+          </td>
+          <td>
+            {{ vehicle?.title || vehicle?.name }}
+          </td>
+          <td>{{ vehicle.level }}</td>
+          <td>
+            {{ getNationByName(vehicle.nation.name)?.title }}
+          </td>
+          <td>
+            {{ getVehicleTypeByName(vehicle.type.name)?.title }}
+          </td>
+        </tr></template
+      >
     </tbody>
   </table>
+  <Popup
+    v-if="showPopup"
+    @close="closePopup"
+    :title="`${currentVehicle?.title}, Уровень ${currentVehicle?.level}`"
+  >
+    <div class="text-white">
+      <img
+        class="w-full"
+        :src="currentVehicle?.icons?.default"
+        :alt="currentVehicle?.title"
+      />
+      <div class="text-xl text-white font-bold">
+        {{ getNationByName(currentVehicle?.nation.name)?.title }}
+        {{ getVehicleTypeByName(currentVehicle?.type.name)?.title }}
+      </div>
+      <p class="p-2 text-justify">
+        {{ currentVehicle?.description || "Нет описания" }}
+      </p>
+    </div>
+  </Popup>
 </template>
 
 <script setup lang="ts">
+import Popup from "@/components/Popup.vue";
 import { ref, computed, PropType, Ref } from "vue";
 import {
   IVehicle,
@@ -70,6 +93,8 @@ const props = defineProps({
     required: true,
   },
 });
+const currentVehicle: Ref<IVehicle | null> = ref(null);
+const showPopup: Ref<boolean> = ref(false);
 
 const sortableKeys: Ref<Array<{ key: IVEHICLE_KEYS; caption: string }>> = ref([
   { key: IVEHICLE_KEYS.level, caption: "Уровень" },
@@ -118,12 +143,20 @@ const sortTable = (column: string) => {
     sortOrder.value = "asc";
   }
 };
+
+function setCurrentVehicle(vehicle: IVehicle) {
+  currentVehicle.value = vehicle;
+  openPopup();
+}
+
+function openPopup() {
+  showPopup.value = true;
+}
+
+function closePopup() {
+  currentVehicle.value = null;
+  showPopup.value = false;
+}
 </script>
 
-<style lang="scss">
-th,
-td {
-  padding: 15px;
-  color: black;
-}
-</style>
+<style lang="scss"></style>

@@ -1,10 +1,5 @@
 <template>
-  <main class="p-8">
-    <nav class="text-left">
-      <router-link to="/" exact-active-class="home">Домой</router-link>
-    </nav>
-    <router-view />
-  </main>
+  <router-view />
 </template>
 
 <script setup lang="ts">
@@ -52,12 +47,6 @@ if (!store.state.allNations.length) {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-body {
-  background-color: #e5e5f7;
-  background-image: radial-gradient(#444cf7 2px, #e5e5f7 2px);
-  background-size: 40px 40px;
 }
 
 .home {
