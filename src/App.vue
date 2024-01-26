@@ -9,6 +9,8 @@ import { watchEffect } from "vue";
 import { useStore } from "./store";
 const store = useStore();
 
+document.title = "World of Warships: Глоссарий";
+
 if (!store.state.allVehicles.length) {
   const { result } = useQuery(VEHICLES_QUERY);
 
