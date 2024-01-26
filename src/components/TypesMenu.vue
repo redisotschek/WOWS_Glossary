@@ -1,13 +1,13 @@
 <template>
   <ul
-    class="py-2 text-sm text-gray-700 dark:text-gray-200"
+    class="py-2 text-sm text-gray-200"
     aria-labelledby="dropdownDefaultButton"
   >
     <li
       v-for="vehicleType in types"
       :key="vehicleType?.name"
       @click="setCurrentType(vehicleType)"
-      class="flex px-4 py-2 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer items-center"
+      class="flex px-4 py-2 bg-gray-700 hover:bg-gray-600 hover:text-white cursor-pointer items-center"
       :class="{
         active: isActive(vehicleType?.name),
       }"

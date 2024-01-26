@@ -1,10 +1,6 @@
 <template>
-  <table
-    class="w-full mt-8 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-  >
-    <thead
-      class="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-    >
+  <table class="w-full mt-8 text-sm text-left rtl:text-right text-gray-400">
+    <thead class="uppercase bg-gray-700">
       <tr>
         <th scope="col" class="py-3"></th>
         <th scope="col" class="py-3">Название</th>
@@ -18,7 +14,6 @@
     <tbody>
       <tr
         v-if="!vehicles.length"
-        @click=""
         class="text-center text-xl w-full font-bold m-auto"
       >
         <td></td>
@@ -32,7 +27,7 @@
           v-for="vehicle in sortedVehicles"
           :key="vehicle.id"
           @click="setCurrentVehicle(vehicle)"
-          class="bg-white text-lg border-b dark:bg-gray-800 dark:border-gray-700 cursor-pointer"
+          class="text-lg bg-gray-800 border-gray-600 cursor-pointer max-h-10 border-b"
         >
           <td>
             <img class="h-10" :src="vehicle.icons.default" />

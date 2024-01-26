@@ -1,13 +1,13 @@
 <template>
   <ul
-    class="py-2 text-sm text-gray-700 dark:text-gray-200"
+    class="py-2 text-sm text-gray-200"
     aria-labelledby="dropdownDefaultButton"
   >
     <li
       v-for="nation in nations"
       :key="nation?.name"
       @click="setCurrentNation(nation)"
-      class="flex px-4 py-2 text-gray-800 dark:hover:text-black cursor-pointer items-center"
+      class="flex px-4 py-2 text-gray-800 hover:text-black cursor-pointer items-center"
       :style="{ backgroundColor: nation?.color }"
       :class="{
         active: isActive(nation?.name),

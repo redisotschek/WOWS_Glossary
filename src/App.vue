@@ -41,6 +41,12 @@ if (!store.state.allNations.length) {
 </script>
 
 <style lang="scss">
+html {
+  height: 100vh;
+  max-width: 100vw;
+  background-color: #0b344d;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
